@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>விவசாயி குரல் நாட்குறிப்பு - பதிவுகள்</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="tamil-text">விவசாயி குரல் நாட்குறிப்பு</h1>
+            <p class="subtitle tamil-text">உங்கள் விவசாய நாட்குறிப்பு பதிவுகள்</p>
+        </header>
+        
+        <nav class="navigation">
+            <a href="index.html" class="nav-btn">பதிவு செய்க</a>
+            <a href="history.html" class="nav-btn active">பதிவுகள்</a>
+        </nav>
+        
+        <main class="main-content">
+            <section class="entries-section">
+                <div class="section-header">
+                    <h2 class="section-title tamil-text">உங்கள் நாட்குறிப்பு பதிவுகள்</h2>
+                    <div class="filter-controls">
+                        <select id="filterCategory" class="filter-select tamil-text">
+                            <option value="all" class="tamil-text">அனைத்து வகைகள்</option>
+                            <option value="planting" class="tamil-text">நடவு</option>
+                            <option value="harvesting" class="tamil-text">அறுவடை</option>
+                            <option value="irrigation" class="tamil-text">பாசனம்</option>
+                            <option value="fertilizer" class="tamil-text">உரம்</option>
+                            <option value="pest-control" class="tamil-text">பூச்சி மற்றும் நோய் கட்டுப்பாடு</option>
+                            <option value="weather" class="tamil-text">வானிலை</option>
+                            <option value="livestock" class="tamil-text">கால்நடை</option>
+                            <option value="equipment" class="tamil-text">கருவிகள்</option>
+                            <option value="other" class="tamil-text">மற்றவை</option>
+                        </select>
+                        <input type="date" id="filterDate" class="filter-date">
+                    </div>
+                </div>
+                
+                <div id="entriesList" class="entries-list">
+                    <!-- Entries will be loaded here -->
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p class="tamil-text">விவசாயி குரல் நாட்குறிப்பு - விவசாயிகளுக்கான குரல் பதிவு துணை</p>
+        </footer>
+    </div>
+
+    <script src="history.js"></script>
+</body>
+</html>

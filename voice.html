@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>விவசாயி குரல் நாட்குறிப்பு - பதிவு செய்க</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="tamil-text">விவசாயி குரல் நாட்குறிப்பு</h1>
+            <p class="subtitle tamil-text">உங்கள் விவசாய நடவடிக்கைகளை குரல் குறிப்புகளுடன் பதிவு செய்யவும்</p>
+        </header>
+        
+        <nav class="navigation">
+            <a href="voice.html" class="nav-btn active">பதிவு செய்க</a>
+            <a href="history.html" class="nav-btn">பதிவுகள்</a>
+        </nav>
+        
+        <main class="main-content">
+            <section class="recorder-section">
+                <h2 class="section-title tamil-text">உங்கள் குரல் பதிவு</h2>
+                <div class="recorder-controls">
+                    <button id="recordBtn" class="record-btn tamil-text">
+                        <span id="recordIcon">🎤</span>
+                        <span id="recordText">பதிவைத் தொடங்கு</span>
+                    </button>
+                    <div id="timer" class="timer">00:00</div>
+                    <audio id="audioPlayer" class="audio-player" controls style="display: none;"></audio>
+                </div>
+                
+                <form id="entryForm" class="entry-form">
+                    <div class="form-group">
+                        <label for="entryDate" class="tamil-text">தேதி</label>
+                        <input type="date" id="entryDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="entryCategory" class="tamil-text">வகை</label>
+                        <select id="entryCategory" required class="tamil-text">
+                            <option value="" class="tamil-text">வகையைத் தேர்ந்தெடுக்கவும்</option>
+                            <option value="planting" class="tamil-text">நடவு</option>
+                            <option value="harvesting" class="tamil-text">அறுவடை</option>
+                            <option value="irrigation" class="tamil-text">பாசனம்</option>
+                            <option value="fertilizer" class="tamil-text">உரம்</option>
+                            <option value="pest-control" class="tamil-text">பூச்சி மற்றும் நோய் கட்டுப்பாடு</option>
+                            <option value="weather" class="tamil-text">வானிலை</option>
+                            <option value="livestock" class="tamil-text">கால்நடை</option>
+                            <option value="equipment" class="tamil-text">கருவிகள்</option>
+                            <option value="other" class="tamil-text">மற்றவை</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="entryNotes" class="tamil-text">கூடுதல் குறிப்புகள்</label>
+                        <textarea id="entryNotes" placeholder="உங்கள் விவசாய நடவடிக்கைகள் பற்றிய கூடுதல் விவரங்களை இங்கே சேர்க்கவும்..." class="tamil-text"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="save-btn tamil-text" id="saveBtn" disabled>பதிவைச் சேமிக்கவும்</button>
+                </form>
+            </section>
+        </main>
+        
+        <footer>
+            <p class="tamil-text">விவசாயி குரல் நாட்குறிப்பு - விவசாயிகளுக்கான குரல் பதிவு துணை</p>
+        </footer>
+    </div>
+
+    <script src="record.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html> 
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌾 குரல்தோழன் - விவசாயிகள் தொழில்முறை வலைப்பின்னல்</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-green-100 via-green-50 to-white flex flex-col min-h-screen">
+
+  <!-- Fixed Header -->
+  <header class="fixed top-0 left-0 w-full bg-green-700 text-white shadow-lg z-50 h-16 flex items-center justify-between px-4">
+    <div class="flex items-center space-x-2">
+      <img src="kuralthozhan icon.png" class="w-8 h-8" alt="App Icon">
+      <h1 class="text-2xl font-bold">குரல்தோழன்</h1>
+    </div>
+    <div class="flex items-center space-x-3">
+      <span id="usernameDisplay" class="font-semibold"></span>
+      <button id="logoutBtn" class="bg-green-800 px-2 py-1 rounded hover:bg-green-900 text-sm">வெளியேறு</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col items-center justify-center pt-20 pb-20 px-4">
+    
+    <!-- Feature Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-5 max-w-4xl w-full justify-items-center">
+
+      <!-- Plant Disease Detection -->
+      <a href="http://127.0.0.1:5000" class="relative group rounded-xl overflow-hidden shadow-lg transition-transform transform hover:scale-105 w-full max-w-[300px]">
+        <img src="OIP.jpeg" 
+             alt="Plant Disease Detection" 
+             class="w-full h-44 md:h-48 lg:h-52 object-cover opacity-80 group-hover:opacity-90 transition-opacity">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent flex flex-col items-center justify-end pb-3">
+          <p class="text-white font-semibold text-sm md:text-base text-center px-1">நோய்கள் கண்டறிதல்</p>
+        </div>
+      </a>
+
+      <!-- Market -->
+      <a href="market.html" class="relative group rounded-xl overflow-hidden shadow-lg transition-transform transform hover:scale-105 w-full max-w-[300px]">
+        <img src="veg.jpg" 
+             alt="Market" 
+             class="w-full h-44 md:h-48 lg:h-52 object-cover opacity-80 group-hover:opacity-90 transition-opacity">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent flex flex-col items-center justify-end pb-3">
+          <p class="text-white font-semibold text-sm md:text-base text-center px-1">சந்தை</p>
+        </div>
+      </a>
+
+      <!-- Voice Diary -->
+      <a href="voice.html" class="relative group rounded-xl overflow-hidden shadow-lg transition-transform transform hover:scale-105 w-full max-w-[300px]">
+        <img src="voice.jpg" 
+             alt="Voice Diary" 
+             class="w-full h-44 md:h-48 lg:h-52 object-cover opacity-80 group-hover:opacity-90 transition-opacity">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent flex flex-col items-center justify-end pb-3">
+          <p class="text-white font-semibold text-sm md:text-base text-center px-1">குரல் குறிப்பேடு</p>
+        </div>
+      </a>
+
+      <!-- Community Forum -->
+      <a href="community.html" class="relative group rounded-xl overflow-hidden shadow-lg transition-transform transform hover:scale-105 w-full max-w-[300px]">
+        <img src="com.png" 
+             alt="Community Forum" 
+             class="w-full h-44 md:h-48 lg:h-52 object-cover opacity-80 group-hover:opacity-90 transition-opacity">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent flex flex-col items-center justify-end pb-3">
+          <p class="text-white font-semibold text-sm md:text-base text-center px-1">விவசாயிகள் வலைப்பின்னல்</p>
+        </div>
+      </a>
+
+    </div>
+
+  </main>
+
+  <!-- Fixed Footer -->
+  <footer class="fixed bottom-0 left-0 w-full bg-green-700 text-white shadow-lg h-12 flex items-center justify-center z-50">
+    <p class="text-sm md:text-base">© 2025 குரல்தோழன் | அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை</p>
+  </footer>
+
+  <!-- JS for username & logout -->
+  <script>
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const usernameDisplay = document.getElementById('usernameDisplay');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    if(currentUser && currentUser.name){
+      usernameDisplay.innerText = `வணக்கம், ${currentUser.name}`;
+    } else {
+      usernameDisplay.innerText = 'வணக்கம்!';
+    }
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('currentUser');
+      window.location.href = 'login.html';
+    });
+  </script>
+
+</body>
+</html>

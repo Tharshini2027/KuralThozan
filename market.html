@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>தமிழ் விவசாயிகள் சந்தை - விற்பனை</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="market.css">
+    
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-area" id="goToHome">
+                    <!-- Replace the src with your actual logo: kuralthozhan icon.png -->
+                    <img src="kuralthozhan icon.png" alt="KuralThozhan Logo" class="logo-img">
+                    <div class="logo-text">
+                        <h1>தமிழ் விவசாயிகள் சந்தை</h1>
+                        <div class="kuralthozhan-text">குரல்தோழன்</div>
+                        <span>விவசாயிகள் விற்பனை மையம்</span>
+                    </div>
+                </div>
+                
+                <div class="user-area">
+                    <div class="user-profile">
+                        <div class="user-avatar">மு</div>
+                        <span>முருகேசன்</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Container -->
+    <div class="container page-container">
+        <!-- SELLING PAGE ONLY -->
+        <div id="sellingPage" class="page-content">
+            <h1 class="page-title">
+                <i class="fas fa-store"></i> என் விற்பனை பொருட்கள்
+            </h1>
+            
+            <div class="selling-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-boxes"></i> எனது தயாரிப்புகள்
+                    </h2>
+                    <button class="add-product-btn" id="addProductBtn">
+                        <i class="fas fa-plus-circle"></i> புதிய தயாரிப்பு சேர்க்க
+                    </button>
+                </div>
+                
+                <!-- FIXED: Multiple rows with auto-wrap -->
+                <div class="products-container" id="sellerProductsGrid">
+                    <!-- Seller's products will appear here in MULTIPLE ROWS -->
+                </div>
+            </div>
+            
+            <div class="selling-section">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-line"></i> விற்பனை புள்ளிவிவரங்கள்
+                </h2>
+                <div class="stats-grid">
+                    <div class="stat-card revenue-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <div class="stat-value">₹0</div>
+                        <div class="stat-label">மொத்த வருவாய்</div>
+                    </div>
+                    <div class="stat-card sold-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">விற்ற பொருட்கள்</div>
+                    </div>
+                    <div class="stat-card active-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <div class="stat-value" id="activeProductsCount">0</div>
+                        <div class="stat-label">செயலில் உள்ள பொருட்கள்</div>
+                    </div>
+                    <div class="stat-card rating-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">வாடிக்கையாளர் மதிப்பீடு</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">
+                    <i class="fas fa-plus-circle"></i> புதிய தயாரிப்பு சேர்க்க
+                </h2>
+                <button class="close-modal" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="productName">
+                                <i class="fas fa-tag"></i> தயாரிப்பு பெயர்
+                            </label>
+                            <input type="text" id="productName" class="form-control" placeholder="எ.கா: மாம்பழம், முருங்கக்காய்" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productCategory">
+                                <i class="fas fa-filter"></i> வகை
+                            </label>
+                            <select id="productCategory" class="form-control" required>
+                                <option value="">தேர்வு செய்க</option>
+                                <option value="vegetables">காய்கறிகள்</option>
+                                <option value="fruits">பழங்கள்</option>
+                                <option value="fertilizers">உரங்கள்</option>
+                                <option value="seeds">விதைகள்</option>
+                                <option value="others">மற்றவை</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productPrice">
+                                <i class="fas fa-rupee-sign"></i> விலை (₹)
+                            </label>
+                            <input type="number" id="productPrice" class="form-control" placeholder="எ.கா: 120" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">
+                                <i class="fas fa-rupee-sign"></i> contact 
+                            </label>
+                            <input type="number" id="contact" class="form-control" placeholder="0987654321" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productQuantity">
+                                <i class="fas fa-weight"></i> அளவு
+                            </label>
+                            <input type="number" id="productQuantity" class="form-control" placeholder="எ.கா: 50" min="1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productUnit">
+                                <i class="fas fa-balance-scale"></i> அலகு
+                            </label>
+                            <select id="productUnit" class="form-control" required>
+                                <option value="kg">கிலோ</option>
+                                <option value="gram">கிராம்</option>
+                                <option value="litre">லிட்டர்</option>
+                                <option value="piece">துண்டு</option>
+                                <option value="bag">பை</option>
+                                <option value="box">பெட்டி</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productLocation">
+                                <i class="fas fa-map-marker-alt"></i> இடம்
+                            </label>
+                            <input type="text" id="productLocation" class="form-control" placeholder="எ.கா: திருவள்ளூர், தமிழ்நாடு" required>
+                        </div>
+                        
+                        <div class="image-upload-container" id="imageUploadContainer">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="upload-text">படத்தை இங்கே கிளிக் செய்யவும் அல்லது இழுத்து விடவும்</div>
+                            <div class="upload-hint">JPEG, PNG அல்லது JPG (அதிகபட்சம் 2MB)</div>
+                            <img id="imagePreview" class="image-preview" alt="பட முன்னோட்டம்">
+                            <input type="file" id="productImage" accept="image/*" style="display: none;">
+                            <button type="button" class="remove-image-btn" id="removeImageBtn">
+                                <i class="fas fa-trash"></i> படத்தை நீக்கு
+                            </button>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="productDescription">
+                                <i class="fas fa-align-left"></i> விளக்கம்
+                            </label>
+                            <textarea id="productDescription" class="form-control" rows="3" placeholder="உங்கள் தயாரிப்பு பற்றிய கூடுதல் விவரங்கள்..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="cancelModalBtn">
+                            <i class="fas fa-times"></i> ரத்து செய்க
+                        </button>
+                        <button type="submit" class="btn-submit" id="submitProductBtn">
+                            <i class="fas fa-check"></i> சேமிக்க
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>தமிழ் விவசாயிகள் சந்தை</h3>
+                    <p>விவசாயிகள் நேரடியாக தங்கள் பொருட்களை விற்கவும், வாங்குவோர் நேரடியாக விவசாயிகளிடமிருந்து வாங்கவும் உதவும் தளம்.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>தொடர்புக்கு</h3>
+                    <p><i class="fas fa-phone"></i> 1800-123-4567</p>
+                    <p><i class="fas fa-envelope"></i> support@tamilfarmermarket.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> சென்னை, தமிழ்நாடு</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>விற்பனையாளர்களுக்கு</h3>
+                    <p>• இலவச பதிவு<br>
+                       • நேரடி கொள்முதல்<br>
+                       • விற்பனை ஆதரவு<br>
+                       • பாதுகாப்பான கட்டணம்</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 தமிழ் விவசாயிகள் சந்தை. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // ========== PRODUCTS DATA - WILL PERSIST ==========
+    let products = [];
+    let currentUser = { id: 1, name: "முருகேசன்" };
+    let currentProductId = 0;
+    let editingProductId = null;
+    let productImageFile = null;
+
+    // DOM Elements
+    const sellerProductsGrid = document.getElementById('sellerProductsGrid');
+    const productModal = document.getElementById('productModal');
+    const addProductBtn = document.getElementById('addProductBtn');
+    const activeProductsCount = document.getElementById('activeProductsCount');
+    const imageUploadContainer = document.getElementById('imageUploadContainer');
+    const productImageInput = document.getElementById('productImage');
+    const imagePreview = document.getElementById('imagePreview');
+    const removeImageBtn = document.getElementById('removeImageBtn');
+
+    // ========== PAGE LOAD - LOAD SAVED PRODUCTS ==========
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("🔄 Page loading...");
+        
+        // Load products from localStorage
+        loadProductsFromStorage();
+        
+        // Setup everything
+        renderSellerProducts();
+        updateActiveProductsCount();
+        setupImageUpload();
+        setupEventListeners();
+        
+        console.log("✅ Page loaded. Products:", products.length);
+        
+        // Add test button for verification
+        addDebugButton();
+    });
+
+    // ========== LOAD PRODUCTS FROM LOCALSTORAGE ==========
+    function loadProductsFromStorage() {
+        try {
+            console.log("📂 Loading from localStorage...");
+            
+            // Get saved data
+            const savedData = localStorage.getItem('farmerMarketData');
+            
+            if (savedData) {
+                console.log("📦 Found saved data");
+                
+                // Parse the data
+                const parsedData = JSON.parse(savedData);
+                
+                if (parsedData && parsedData.products) {
+                    products = parsedData.products;
+                    currentProductId = parsedData.currentProductId || 0;
+                    
+                    console.log("✅ Loaded successfully!");
+                    console.log("📊 Products loaded:", products.length);
+                    
+                    // Check if images are saved
+                    products.forEach(p => {
+                        console.log(`  - ${p.name}: ${p.image ? 'Has image' : 'No image'}`);
+                    });
+                } else {
+                    console.log("⚠️ No valid product data found");
+                    products = [];
+                    currentProductId = 0;
+                }
+            } else {
+                console.log("📭 No saved data found");
+                products = [];
+                currentProductId = 0;
+            }
+        } catch (error) {
+            console.error("❌ Error loading from storage:", error);
+            products = [];
+            currentProductId = 0;
+        }
+    }
+
+    // ========== SAVE PRODUCTS TO LOCALSTORAGE ==========
+    function saveProductsToStorage() {
+        try {
+            console.log("💾 Saving to localStorage...");
+            
+            // Prepare data object
+            const saveData = {
+                products: products,
+                currentProductId: currentProductId,
+                lastSaved: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('farmerMarketData', JSON.stringify(saveData));
+            
+            console.log("✅ Saved successfully!");
+            console.log("📊 Products saved:", products.length);
+            
+            return true;
+        } catch (error) {
+            console.error("❌ Error saving to storage:", error);
+            alert('தரவு சேமிப்பில் பிழை! உங்கள் தரவு இழக்கப்படலாம்.');
+            return false;
+        }
+    }
+
+    // ========== IMAGE UPLOAD FUNCTIONS ==========
+    function setupImageUpload() {
+        // Click to upload
+        imageUploadContainer.addEventListener('click', function() {
+            productImageInput.click();
+        });
+
+        // File input change
+        productImageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleImageFile(file);
+            }
+        });
+
+        // Drag and drop
+        imageUploadContainer.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            imageUploadContainer.classList.add('dragover');
+        });
+
+        imageUploadContainer.addEventListener('dragleave', function() {
+            imageUploadContainer.classList.remove('dragover');
+        });
+
+        imageUploadContainer.addEventListener('drop', function(e) {
+            e.preventDefault();
+            imageUploadContainer.classList.remove('dragover');
+            
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleImageFile(file);
+            } else {
+                showNotification('தயவு செய்து ஒரு பட கோப்பை மட்டும் பதிவேற்றவும்.', 'error');
+            }
+        });
+
+        // Remove image
+        removeImageBtn.addEventListener('click', function() {
+            productImageFile = null;
+            imagePreview.style.display = 'none';
+            removeImageBtn.style.display = 'none';
+            productImageInput.value = '';
+        });
+    }
+
+    // ========== HANDLE IMAGE FILE ==========
+    async function handleImageFile(file) {
+        // Check file size (max 2MB)
+        if (file.size > 2 * 1024 * 1024) {
+            showNotification('பட கோப்பு அளவு 2MB க்கு மேல் இருக்கக்கூடாது.', 'error');
+            return;
+        }
+
+        productImageFile = file;
+        
+        try {
+            // Create preview from file
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+                removeImageBtn.style.display = 'block';
+            };
+            
+            reader.onerror = function() {
+                showNotification('படத்தை ஏற்றுவதில் பிழை.', 'error');
+            };
+            
+            reader.readAsDataURL(file);
+            
+        } catch (error) {
+            console.error("Error reading image file:", error);
+            showNotification('படத்தை ஏற்றுவதில் பிழை.', 'error');
+        }
+    }
+
+    // ========== CONVERT IMAGE TO BASE64 ==========
+    function convertImageToBase64(file) {
+        return new Promise((resolve, reject) => {
+            if (!file) {
+                resolve(null);
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                resolve(e.target.result);
+            };
+            
+            reader.onerror = function(error) {
+                reject(error);
+            };
+            
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // ========== EVENT LISTENERS ==========
+    function setupEventListeners() {
+        // Go to home
+        document.getElementById('goToHome').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Product Modal
+        addProductBtn.addEventListener('click', openProductModal);
+        document.getElementById('closeModalBtn').addEventListener('click', closeProductModal);
+        document.getElementById('cancelModalBtn').addEventListener('click', closeProductModal);
+
+        // Product Form Submission
+        document.getElementById('productForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            await handleProductSubmit();
+        });
+    }
+
+    // ========== MODAL FUNCTIONS ==========
+    function openProductModal() {
+        document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus-circle"></i> புதிய தயாரிப்பு சேர்க்க';
+        document.getElementById('submitProductBtn').innerHTML = '<i class="fas fa-check"></i> சேமிக்க';
+        editingProductId = null;
+        document.getElementById('productForm').reset();
+        imagePreview.style.display = 'none';
+        removeImageBtn.style.display = 'none';
+        productImageFile = null;
+        productModal.style.display = 'flex';
+    }
+
+    function closeProductModal() {
+        productModal.style.display = 'none';
+    }
+
+    // ========== HANDLE PRODUCT SUBMISSION ==========
+    async function handleProductSubmit() {
+        // Get form values
+        const productName = document.getElementById('productName').value.trim();
+        const productCategory = document.getElementById('productCategory').value;
+        const productPrice = parseInt(document.getElementById('productPrice').value);
+        const productQuantity = parseInt(document.getElementById('productQuantity').value);
+        const productUnit = document.getElementById('productUnit').value;
+        const productLocation = document.getElementById('productLocation').value.trim();
+        const productDescription = document.getElementById('productDescription').value.trim();
+        
+        // Validate
+        if (!productName || !productCategory || !productPrice || !productQuantity || !productLocation) {
+            showNotification('அனைத்து தேவையான புலங்களையும் நிரப்பவும்.', 'error');
+            return;
+        }
+        
+        // Convert image to Base64 for permanent storage
+        let imageData = null;
+        if (productImageFile) {
+            try {
+                imageData = await convertImageToBase64(productImageFile);
+                console.log("✅ Image converted to Base64, size:", imageData ? imageData.length : 0);
+            } catch (error) {
+                console.error("❌ Error converting image:", error);
+                showNotification('படத்தை சேமிப்பதில் பிழை.', 'error');
+            }
+        }
+        
+        // If no new image uploaded, check if we're editing and keep existing image
+        if (!imageData && editingProductId) {
+            const existingProduct = products.find(p => p.id === editingProductId);
+            if (existingProduct && existingProduct.image) {
+                imageData = existingProduct.image;
+                console.log("📸 Keeping existing image");
+            }
+        }
+        
+        // If still no image, use placeholder
+        if (!imageData) {
+            const placeholderImages = {
+                'vegetables': 'https://images.unsplash.com/photo-1594282482133-6c7ec6c0e5c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                'fruits': 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                'fertilizers': 'https://images.unsplash.com/photo-1589923186741-b7d59d6b2c4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                'seeds': 'https://images.unsplash.com/photo-1559656914-a7f3e6f8c6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                'others': 'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+            };
+            imageData = placeholderImages[productCategory] || placeholderImages['others'];
+            console.log("🎨 Using placeholder image");
+        }
+        
+        if (editingProductId) {
+            // Update existing product
+            const index = products.findIndex(p => p.id === editingProductId);
+            if (index !== -1) {
+                products[index] = {
+                    ...products[index],
+                    name: productName,
+                    category: productCategory,
+                    price: productPrice,
+                    quantity: productQuantity,
+                    unit: productUnit,
+                    location: productLocation,
+                    description: productDescription,
+                    image: imageData
+                };
+                
+                showNotification(`"${productName}" புதுப்பிக்கப்பட்டது!`, 'success');
+            }
+        } else {
+            // Add new product
+            currentProductId++;
+            const newProduct = {
+                id: currentProductId,
+                name: productName,
+                category: productCategory,
+                price: productPrice,
+                quantity: productQuantity,
+                unit: productUnit,
+                location: productLocation,
+                description: productDescription,
+                seller: currentUser.name,
+                sellerId: currentUser.id,
+                status: "available",
+                date: new Date().toLocaleDateString('ta-IN'),
+                rating: (4 + Math.random() * 0.9).toFixed(1),
+                image: imageData
+            };
+            
+            products.unshift(newProduct);
+            showNotification(`"${productName}" சேர்க்கப்பட்டது!`, 'success');
+        }
+        
+        // 🔥 CRITICAL: SAVE TO STORAGE
+        saveProductsToStorage();
+        
+        // Update UI
+        renderSellerProducts();
+        updateActiveProductsCount();
+        closeProductModal();
+    }
+
+    // ========== RENDER PRODUCTS ==========
+    function renderSellerProducts() {
+        const sellerProducts = products.filter(p => p.sellerId === currentUser.id);
+        
+        if (sellerProducts.length === 0) {
+            sellerProductsGrid.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>உங்களுக்கு இன்னும் பொருட்கள் இல்லை</h3>
+                    <p>புதிய தயாரிப்பு சேர்க்க பொத்தானை கிளிக் செய்யவும்</p>
+                </div>
+            `;
+            return;
+        }
+        
+        sellerProductsGrid.innerHTML = '';
+        
+        sellerProducts.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+            
+            // Get image source - handle both Base64 and URL images
+            let imageSrc = '';
+            if (product.image) {
+                // Check if it's a Base64 image or URL
+                if (product.image.startsWith('data:image/')) {
+                    imageSrc = product.image; // Base64 image
+                } else if (product.image.startsWith('http')) {
+                    imageSrc = product.image; // External URL
+                } else {
+                    // Fallback placeholder
+                    imageSrc = `https://via.placeholder.com/400x300/27ae60/ffffff?text=${encodeURIComponent(product.name.substring(0,10))}`;
+                }
+            } else {
+                // Default placeholder based on category
+                const placeholderImages = {
+                    'vegetables': 'https://images.unsplash.com/photo-1594282482133-6c7ec6c0e5c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                    'fruits': 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                    'fertilizers': 'https://images.unsplash.com/photo-1589923186741-b7d59d6b2c4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                    'seeds': 'https://images.unsplash.com/photo-1559656914-a7f3e6f8c6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+                    'others': 'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+                };
+                imageSrc = placeholderImages[product.category] || placeholderImages['others'];
+            }
+            
+            productCard.innerHTML = `
+                <div class="product-image">
+                    <img src="${imageSrc}" alt="${product.name}" loading="lazy" 
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/27ae60/ffffff?text=${encodeURIComponent(product.name.substring(0,10))}';">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">${product.name}</h3>
+                    <div class="product-category">
+                        <i class="${getCategoryIcon(product.category)}"></i> ${getCategoryName(product.category)}
+                    </div>
+                    <div class="product-price">₹${product.price}/${product.unit}</div>
+                    <div class="product-meta">
+                        <span><i class="fas fa-weight"></i> ${product.quantity} ${product.unit}</span>
+                        <span><i class="fas fa-map-marker-alt"></i> ${product.location}</span>
+                    </div>
+                    <div class="product-meta">
+                        <span><i class="fas fa-star"></i> ${product.rating || '4.5'}</span>
+                        <span><i class="fas fa-calendar"></i> ${product.date || new Date().toLocaleDateString('ta-IN')}</span>
+                    </div>
+                    ${product.description ? `<div class="product-description">${product.description}</div>` : ''}
+                    <div class="product-actions">
+                        <button class="action-btn edit-btn" data-id="${product.id}">
+                            <i class="fas fa-edit"></i> திருத்து
+                        </button>
+                        <button class="action-btn delete-btn" data-id="${product.id}">
+                            <i class="fas fa-trash"></i> நீக்கு
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            sellerProductsGrid.appendChild(productCard);
+        });
+        
+        // Add event listeners
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productId = parseInt(this.getAttribute('data-id'));
+                editProduct(productId);
+            });
+        });
+        
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productId = parseInt(this.getAttribute('data-id'));
+                deleteProduct(productId);
+            });
+        });
+    }
+
+    // ========== EDIT PRODUCT ==========
+    function editProduct(id) {
+        const product = products.find(p => p.id === id);
+        if (!product) return;
+        
+        editingProductId = id;
+        
+        document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit"></i> தயாரிப்பு திருத்துக';
+        document.getElementById('submitProductBtn').innerHTML = '<i class="fas fa-save"></i> சேமிக்க';
+        
+        document.getElementById('productName').value = product.name;
+        document.getElementById('productCategory').value = product.category;
+        document.getElementById('productPrice').value = product.price;
+        document.getElementById('productQuantity').value = product.quantity;
+        document.getElementById('productUnit').value = product.unit;
+        document.getElementById('productLocation').value = product.location;
+        document.getElementById('productDescription').value = product.description || '';
+        
+        // Handle image preview in modal
+        if (product.image) {
+            imagePreview.src = product.image;
+            imagePreview.style.display = 'block';
+            removeImageBtn.style.display = 'block';
+        } else {
+            imagePreview.style.display = 'none';
+            removeImageBtn.style.display = 'none';
+        }
+        
+        productModal.style.display = 'flex';
+    }
+
+    // ========== DELETE PRODUCT ==========
+    function deleteProduct(id) {
+        const product = products.find(p => p.id === id);
+        if (!product) return;
+        
+        if (confirm(`"${product.name}" நிச்சயமாக நீக்கவா?`)) {
+            const index = products.findIndex(p => p.id === id);
+            if (index !== -1) {
+                products.splice(index, 1);
+            }
+            
+            // Save after delete
+            saveProductsToStorage();
+            
+            renderSellerProducts();
+            updateActiveProductsCount();
+            showNotification(`"${product.name}" நீக்கப்பட்டது!`, 'success');
+        }
+    }
+
+    // ========== HELPER FUNCTIONS ==========
+    function getCategoryName(category) {
+        const names = {
+            'vegetables': 'காய்கறிகள்',
+            'fruits': 'பழங்கள்',
+            'fertilizers': 'உரங்கள்',
+            'seeds': 'விதைகள்',
+            'others': 'மற்றவை'
+        };
+        return names[category] || category;
+    }
+
+    function getCategoryIcon(category) {
+        const icons = {
+            'vegetables': 'fas fa-carrot',
+            'fruits': 'fas fa-apple-alt',
+            'fertilizers': 'fas fa-flask',
+            'seeds': 'fas fa-seedling',
+            'others': 'fas fa-box'
+        };
+        return icons[category] || 'fas fa-box';
+    }
+
+    function updateActiveProductsCount() {
+        const activeProducts = products.filter(p => p.sellerId === currentUser.id);
+        activeProductsCount.textContent = activeProducts.length;
+    }
+
+    // ========== NOTIFICATION SYSTEM ==========
+    function showNotification(message, type = 'success') {
+        const existing = document.querySelectorAll('.notification');
+        existing.forEach(n => n.remove());
+        
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 3000);
+    }
+
+    // ========== DEBUG/VERIFICATION FUNCTIONS ==========
+    function addDebugButton() {
+        const debugBtn = document.createElement('button');
+        debugBtn.innerHTML = '🔍 சோதனை';
+        debugBtn.style.position = 'fixed';
+        debugBtn.style.bottom = '20px';
+        debugBtn.style.right = '20px';
+        debugBtn.style.padding = '10px 15px';
+        debugBtn.style.background = '#e74c3c';
+        debugBtn.style.color = 'white';
+        debugBtn.style.border = 'none';
+        debugBtn.style.borderRadius = '5px';
+        debugBtn.style.cursor = 'pointer';
+        debugBtn.style.zIndex = '9999';
+        debugBtn.style.fontSize = '14px';
+        debugBtn.style.fontWeight = 'bold';
+        
+        debugBtn.onclick = function() {
+            console.clear();
+            console.log("=== 🧪 சோதனை அறிக்கை ===");
+            console.log("📦 Products in memory:", products.length);
+            
+            // Show image information
+            products.forEach((p, i) => {
+                const hasImage = p.image ? true : false;
+                const imageType = p.image ? 
+                    (p.image.startsWith('data:image/') ? 'Base64' : 
+                     p.image.startsWith('http') ? 'URL' : 'Unknown') : 'No image';
+                console.log(`  ${i+1}. ${p.name}: ${imageType} (${hasImage ? '✓' : '✗'})`);
+            });
+            
+            console.log("💾 Total localStorage size:", 
+                (localStorage.getItem('farmerMarketData') || '').length, 'characters');
+            
+            alert(`சோதனை முடிவுகள்:\n\n` +
+                  `பொருட்கள்: ${products.length}\n` +
+                  `படங்கள்: ${products.filter(p => p.image).length}/${products.length}\n` +
+                  `கடைசியாக சேமிக்கப்பட்டது: ${new Date().toLocaleTimeString('ta-IN')}\n\n` +
+                  `விபரங்களுக்கு கன்சோலைப் பாருங்கள் (F12 -> Console)`);
+        };
+        
+        document.body.appendChild(debugBtn);
+    }
+
+    // ========== AUTO-SAVE ON PAGE UNLOAD ==========
+    window.addEventListener('beforeunload', function() {
+        console.log("⚠️ Page closing - Auto-saving...");
+        saveProductsToStorage();
+    });
+
+    console.log("✅ JavaScript loaded successfully!");
+    console.log("📱 Products AND IMAGES will persist even after shutdown!");
+</script>
+</body>
+</html>

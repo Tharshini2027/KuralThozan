@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <title>குரல்தோழன்</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Noto Sans Tamil", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9, #ffffff);
+            overflow: hidden;
+        }
+
+        .center {
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+        }
+
+        /* Logo circle */
+        .logo-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            animation: floatLogo 2s ease-in-out infinite;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .logo-circle:hover {
+            box-shadow: 0 10px 25px rgba(46,125,50,0.35);
+        }
+
+        .logo-circle img {
+            width: 100px;
+        }
+  h1 {
+            margin: 20px 0;
+            font-size: 28px;
+            color: #1b5e20;
+        }
+
+        button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 13px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 210px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        button:hover {
+            background-color: #1b5e20;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: scale(0.96);
+        }
+
+        /* Splash screen */
+        #splash {
+            display: block;
+        }
+
+        /* Option card */
+        #options {
+            display: none;
+        }
+
+        .card {
+            background: white;
+            padding: 32px 22px;
+            border-radius: 20px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+            width: 90%;
+            max-width: 330px;
+            margin: auto;
+            animation: slideUp 0.6s ease;
+        }
+
+        .card .logo-circle {
+            width: 100px;
+            height: 100px;
+            animation: none;
+            margin-bottom: 18px;
+        }
+
+        .card .logo-circle img {
+            width: 75px;
+        }
+
+        /* Animations */
+        @keyframes floatLogo {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SPLASH SCREEN -->
+    <div id="splash" class="center">
+        <div class="logo-circle">
+            <img src="kuralthozhan icon.png" alt="குரல்தோழன் லோகோ">
+        </div>
+        <h1>குரல்தோழன்</h1>
+        <p class="text-gray-700 text-base md:text-lg mb-6">உங்கள் புத்திசாலி வேளாண் துணை</p>
+        <button onclick="showOptions()">தொடங்கலாம்</button>
+    </div>
+
+    <!-- REGISTER / LOGIN OPTIONS -->
+    <div id="options" class="center">
+        <div class="card">
+            <div class="logo-circle">
+                <img src="kuralthozhan icon.png" alt="குரல்தோழன் லோகோ">
+            </div>
+
+            <h1>குரல்தோழன்</h1>
+
+            <button onclick="goNext()">பதிவு செய்யவும்</button>
+<button onclick="goNexts()">உள்நுழையவும்</button>
+
+        </div>
+    </div>
+
+    <script>
+        function showOptions() {
+            document.getElementById("splash").style.display = "none";
+            document.getElementById("options").style.display = "block";
+        }
+    
+function goNext() {
+  // 👇 WRITE THE NEXT PAGE FILE NAME HERE
+  window.location.href = "register.html";
+}
+function goNexts() {
+  // 👇 WRITE THE NEXT PAGE FILE NAME HERE
+  window.location.href = "login.html";
+}
+
+
+    </script>
+
+</body>
+</html>
